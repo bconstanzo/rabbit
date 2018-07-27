@@ -1,2 +1,3 @@
 # rabbit
-A modern, high performance file carving framework
+
+A modern, high performance file and data carving framework.
