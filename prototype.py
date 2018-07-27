@@ -91,12 +91,10 @@ class Carver:
         needles = {}
         stack = {}
         for f in self.formats:
-            needles = {f.header: ("header", f), f.footer: ("footer", f)}
+            needles.update({f.header: ("header", f), f.footer: ("footer", f)})
             stack[f] = {"header":[], "footer":[]}
         provider = self.provider
         extractor = self.extractor
-        pprint(stack)
-        pprint(needles)
         for block, offset, n in provider.find(needles):
             match_type, fmt = needles[n]
             stack[fmt][match_type].append((block, offset, n))
@@ -110,7 +108,6 @@ class Carver:
                 start = (start[0] * bsize) + start[1]
                 end = (end[0] * bsize) + end[1] + len(n)
                 extractor.extract(start, end, fmt.extension)
-        pprint(stack)
 
 
 
